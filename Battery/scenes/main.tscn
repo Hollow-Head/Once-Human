@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cblogtyku6h25"]
+
+[ext_resource type="Script" path="res://scripts/main_camera.gd" id="1_sfltn"]
+[ext_resource type="PackedScene" uid="uid://jslxb44t5xu0" path="res://scenes/player.tscn" id="1_xbvel"]
+[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_ybmwu"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Main Camera" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+script = ExtResource("1_sfltn")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+position = Vector2(-45, 14.0001)
+scale = Vector2(12.5781, 8.6875)
+texture = ExtResource("2_ybmwu")
+
+[node name="Player" parent="." instance=ExtResource("1_xbvel")]
+position = Vector2(-402, -20)
