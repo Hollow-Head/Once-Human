@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpit8yqqppkun"]
+[gd_scene load_steps=7 format=3 uid="uid://dpit8yqqppkun"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_286y2"]
 [ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_1me4b"]
+[ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="3_u0jdi"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="4_gbnq4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v57ch"]
 size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5rrc"]
+size = Vector2(130, 130)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_286y2")
@@ -16,3 +21,18 @@ texture = ExtResource("2_1me4b")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v57ch")
+
+[node name="WhiteGun" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("3_u0jdi")
+hitbox = NodePath("Hitbox")
+radius = null
+attackDelay = null
+damage = 1.0
+knockbackForce = 1.0
+belongsToEnemy = true
+
+[node name="Hitbox" type="Area2D" parent="WhiteGun"]
+script = ExtResource("4_gbnq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WhiteGun/Hitbox"]
+shape = SubResource("RectangleShape2D_h5rrc")

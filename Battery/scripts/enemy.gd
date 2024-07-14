@@ -11,8 +11,11 @@ func _ready():
 	dead.connect(_deadSignal)
 
 func _physics_process(delta):
-	direction = global_position.direction_to(Player.player.global_position)
-	velocity = SPEED * direction
+	if not isInKnockbackState():
+		direction = global_position.direction_to(Player.player.global_position)
+		velocity = SPEED * direction
+	else:
+		velocity = SPEED * knockbackDirection * knockbackForce
 	move_and_slide()
 
 func _deadSignal():

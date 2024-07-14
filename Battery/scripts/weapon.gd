@@ -5,7 +5,15 @@ class_name Weapon
 ## The max distance the Weapon can be away from Player
 @export var radius : float = 100
 
+@export var attackDelay : float
+@export var damage : float
+@export var knockbackForce : float
+@export var belongsToEnemy : bool
+
 func _process(delta):
+	if belongsToEnemy:
+		set_process(false)
+		return
 	rotateAroundPlayer()
 
 func rotateAroundPlayer():

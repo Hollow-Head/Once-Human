@@ -22,8 +22,10 @@ func attack_enemy(damage : float, knockbackForce : float) -> void:
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("Enemy"):
-			body.receive_damage(self, damage, knockbackForce)
+			var direction = get_parent().global_position.direction_to(body.global_position)
+			body.receive_damage(self, damage, direction, knockbackForce)
 
 func body_entered(body : Node2D):
 	if "Player" in body.name:
-		body.receive_damage(self, _damage, _knockbackForce)
+		var direction = get_parent().global_position.direction_to(body.global_position)
+		body.receive_damage(self, _damage, direction, _knockbackForce)

@@ -21,9 +21,12 @@ shape = SubResource("RectangleShape2D_v57ch")
 
 [node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
 script = ExtResource("3_wpeq1")
+attackDelay = null
 damage = 5.0
 knockbackForce = 1.0
 hitbox = NodePath("Hitbox")
+radius = null
+belongsToEnemy = null
 
 [node name="Sprite2D2" type="Sprite2D" parent="Weapon"]
 scale = Vector2(0.15625, 1.28125)
