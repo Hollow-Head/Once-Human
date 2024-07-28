@@ -1,3 +1,5 @@
+@icon("res://assets/nodeIcons/whiteGun.png")
+
 extends Weapon
 
 class_name WhiteGun
@@ -5,6 +7,9 @@ class_name WhiteGun
 @export var hitbox : Hitbox
 
 func _physics_process(delta):
+	if Global.is_paused():
+		return
+	
 	if belongsToEnemy:
 		set_physics_process(false)
 		return

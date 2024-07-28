@@ -25,6 +25,13 @@ func attack_enemy(damage : float, knockbackForce : float) -> void:
 			var direction = get_parent().global_position.direction_to(body.global_position)
 			body.receive_damage(self, damage, direction, knockbackForce)
 
+func bullet_attack_enemy(damage : float, knockbackForce : float) -> void:
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("Enemy"):
+			body.receive_damage(self, damage, get_parent().direction, knockbackForce)
+			get_parent().queue_free()
+
 func body_entered(body : Node2D):
 	if "Player" in body.name:
 		var direction = get_parent().global_position.direction_to(body.global_position)

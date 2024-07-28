@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 class_name Entity
 
-@export var life : float
+@export var life := 0.0
+@export var SPEED := 0.0
+var current_speed : float
 
 ## Knockback variables
 const _knockbackSpeed := 600.0
@@ -11,7 +13,7 @@ const _knockbackDelay := 0.25
 var _inKnockbackState : bool
 var knockbackDirection : Vector2
 var knockbackForce : float
-var _knockbackTimer := Timer.new()
+var _knockbackTimer := GlobalTimer.new()
 
 ## Signal emited when life is equal or below zero
 signal dead
@@ -22,6 +24,8 @@ func _init():
 	add_to_group("Entity")
 
 func _process(delta):
+	if Global.is_paused():
+		return
 	if life <= 0:
 		dead.emit()
 
@@ -36,7 +40,10 @@ func receive_knockback(direction : Vector2, knockbackForce : float):
 	_inKnockbackState = true
 	self.knockbackDirection = direction
 	self.knockbackForce = knockbackForce
-	_knockbackTimer.start(_knockbackDelay)
+	if not "Player" in name:
+		_knockbackTimer.start(_knockbackTimer.adjusted_time(_knockbackDelay, Global.get_time_speed()))
+	else:
+		_knockbackTimer.start(_knockbackTimer.adjusted_time(_knockbackDelay, Global.get_player_time_speed()))
 
 func knockbackTimeout() -> void:
 	_inKnockbackState = false

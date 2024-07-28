@@ -11,18 +11,20 @@ class_name Weapon
 @export var belongsToEnemy : bool
 
 func _process(delta):
+	if Global.is_paused():
+		return
+		
 	if belongsToEnemy:
 		set_process(false)
 		return
 	rotateAroundPlayer()
 
 func rotateAroundPlayer():
-	global_position = Player.player.global_position
-	var distanceToMouse = global_position.distance_to(get_global_mouse_position())
-	if distanceToMouse > radius:
-		distanceToMouse = radius
-	var angle = global_position.angle_to_point(get_global_mouse_position())
-	global_position = (Vector2(cos(angle), sin(angle)) * distanceToMouse) + Player.player.global_position
-	
-	rotate(-rotation)
-	rotate(angle)
+	var mousePos = get_global_mouse_position()
+	var playerPos = Player.player.global_transform.origin
+	var distance = playerPos.distance_to(mousePos)
+	var mouseDir = (mousePos - playerPos).normalized()
+	if distance > radius:
+		mousePos = playerPos + (mouseDir * radius)
+	self.global_transform.origin = mousePos
+	rotation = Player.player.get_angle_to(get_global_mouse_position())

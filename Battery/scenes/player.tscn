@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://jslxb44t5xu0"]
+[gd_scene load_steps=5 format=3 uid="uid://jslxb44t5xu0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nm6da"]
 [ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_rgb8h"]
-[ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="3_wpeq1"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="4_l5p7d"]
+[ext_resource type="PackedScene" uid="uid://cfel7hd7tu2kn" path="res://scenes/Weapon/Fire Gun/simple_pistol.tscn" id="3_w5gkp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v57ch"]
 size = Vector2(128, 128)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nm6da")
+pickRadius = 300
 life = 10.0
+SPEED = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.262745, 1, 1, 1)
@@ -19,22 +20,4 @@ texture = ExtResource("2_rgb8h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v57ch")
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("3_wpeq1")
-attackDelay = null
-damage = 5.0
-knockbackForce = 1.0
-hitbox = NodePath("Hitbox")
-radius = null
-belongsToEnemy = null
-
-[node name="Sprite2D2" type="Sprite2D" parent="Weapon"]
-scale = Vector2(0.15625, 1.28125)
-texture = ExtResource("2_rgb8h")
-
-[node name="Hitbox" type="Area2D" parent="Weapon"]
-script = ExtResource("4_l5p7d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Weapon/Hitbox"]
-build_mode = 1
-polygon = PackedVector2Array(9, -81, 158, -135, 203, -3, 148, 134, 8, 79)
+[node name="Simple Pistol" parent="." instance=ExtResource("3_w5gkp")]

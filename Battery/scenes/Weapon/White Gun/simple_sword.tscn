@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqbmke1p4608n"]
+
+[ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="1_1u2gq"]
+[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_xq6m5"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_245hm"]
+
+[node name="Simple Sword" type="Node2D" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("1_1u2gq")
+hitbox = NodePath("Hitbox")
+damage = 5.0
+knockbackForce = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15625, 1.28125)
+texture = ExtResource("2_xq6m5")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("3_245hm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+build_mode = 1
+polygon = PackedVector2Array(9, -81, 158, -135, 203, -3, 148, 134, 8, 79)

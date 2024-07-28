@@ -1,20 +1,20 @@
 extends Node
 
-var _spawnTimer := Timer.new()
+var _spawnTimer := GlobalTimer.new()
 var spawnDelay : float = 1.5
 
 var rng := RandomNumberGenerator.new()
 
 var cameraRect : Rect2
 
-var enemyScene = preload("res://scenes/enemy.tscn")
+var enemyScene = preload("res://scenes/Enemies/enemy.tscn")
 
 enum directionToSpawn{LEFT, RIGHT, UP, DOWN}
 
 func _ready():
 	add_child(_spawnTimer)
 	_spawnTimer.timeout.connect(_spawnTimerTimeout)
-	_spawnTimer.start(spawnDelay)
+	_spawnTimer.the_start(spawnDelay)
 
 func _spawnTimerTimeout():
 	spawnOutsideCameraRandom()
@@ -60,7 +60,7 @@ func start(spawnDelay : float) -> void:
 	_spawnTimer.start(spawnDelay)
 
 func stop() -> void:
-	_spawnTimer.stop()
+	_spawnTimer.paused = true
 
 func resume() -> void:
-	start(spawnDelay)
+	_spawnTimer.paused = false

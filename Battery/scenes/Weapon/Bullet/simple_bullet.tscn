@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4lk855jaitt6"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_3pdl0"]
+[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_m7gnm"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_62tlg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr4ll"]
+size = Vector2(76, 22)
+
+[node name="Simple Bullet" type="Node2D" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("1_3pdl0")
+hitbox = NodePath("Hitbox")
+damage = 2.0
+knockbackForce = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.6, 0.175)
+texture = ExtResource("2_m7gnm")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("3_62tlg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_cr4ll")

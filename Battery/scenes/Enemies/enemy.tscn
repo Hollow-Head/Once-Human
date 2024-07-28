@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpit8yqqppkun"]
+[gd_scene load_steps=8 format=3 uid="uid://dpit8yqqppkun"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_286y2"]
 [ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_1me4b"]
+[ext_resource type="PackedScene" uid="uid://bqle8c5qyu2nc" path="res://scenes/experience_points.tscn" id="2_vyp04"]
 [ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="3_u0jdi"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="4_gbnq4"]
 
@@ -13,7 +14,11 @@ size = Vector2(130, 130)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_286y2")
+min = 1
+max = 5
+experience_point_scene = ExtResource("2_vyp04")
 life = 10.0
+SPEED = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.866667, 0.298039, 0.329412, 1)
@@ -25,8 +30,6 @@ shape = SubResource("RectangleShape2D_v57ch")
 [node name="WhiteGun" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
 script = ExtResource("3_u0jdi")
 hitbox = NodePath("Hitbox")
-radius = null
-attackDelay = null
 damage = 1.0
 knockbackForce = 1.0
 belongsToEnemy = true

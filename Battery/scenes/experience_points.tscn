@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqle8c5qyu2nc"]
+
+[ext_resource type="Script" path="res://scripts/experience_point.gd" id="1_gqeua"]
+[ext_resource type="Texture2D" uid="uid://cl4ugrscgyef3" path="res://assets/sprites/drops/tester_gear.png" id="2_53v1h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d63ih"]
+radius = 16.0
+
+[node name="ExperiencePoints" type="Area2D"]
+position = Vector2(-219, -7)
+script = ExtResource("1_gqeua")
+SPEED = 500.0
+autoPickable = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_53v1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d63ih")
