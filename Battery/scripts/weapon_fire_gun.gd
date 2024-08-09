@@ -14,6 +14,7 @@ func _physics_process(delta):
 		
 	if not belongsToEnemy:
 		if Input.is_action_just_pressed("Attack"):
+			Camera.shake_camera(7.5)
 			direction = Player.player.global_position.direction_to(get_global_mouse_position())
 			shoot(direction)
 

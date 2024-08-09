@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://clakvgjptrt2s"]
+
+[ext_resource type="Texture2D" uid="uid://n4ahpwm4ig4q" path="res://assets/sprites/Upgrades/upgradeUI.png" id="1_ion4k"]
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_km432"]
+[ext_resource type="Texture2D" uid="uid://dett23cdi5cxx" path="res://assets/sprites/Upgrades/more_xp.png" id="2_8jmqe"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="3_bo3qx"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0salt"]
+color = Color(0, 0, 0, 0)
+
+[node name="More XP" type="Panel"]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -852.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_km432")
+upgrade = 2
+is_percentage = true
+percentage = 50
+
+[node name="Fundo" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 450.0
+texture = ExtResource("1_ion4k")
+
+[node name="Icon" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 94.0
+offset_right = 230.0
+offset_bottom = 242.0
+texture = ExtResource("2_8jmqe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 269.0
+offset_right = 266.0
+offset_bottom = 417.0
+theme_override_fonts/normal_font = ExtResource("3_bo3qx")
+bbcode_enabled = true
+text = "Aumenta o seu ganho de XP em [PERCENTAGE]%."
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 447.635
+theme_override_styles/focus = SubResource("StyleBoxLine_0salt")
+flat = true

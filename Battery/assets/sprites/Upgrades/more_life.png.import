@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7u0npjjaccxx"
-path="res://.godot/imported/fireGun.png-bf81e16b6e0e5b227f20fd9873400486.ctex"
+uid="uid://clr7u661xhhxk"
+path="res://.godot/imported/more_life.png-b21769ac2ee81de142743c7c4bd0ef28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/nodeIcons/fireGun.png"
-dest_files=["res://.godot/imported/fireGun.png-bf81e16b6e0e5b227f20fd9873400486.ctex"]
+source_file="res://assets/sprites/Upgrades/more_life.png"
+dest_files=["res://.godot/imported/more_life.png-b21769ac2ee81de142743c7c4bd0ef28.ctex"]
 
 [params]
 

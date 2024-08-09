@@ -1,18 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpit8yqqppkun"]
+[gd_scene load_steps=11 format=3 uid="uid://dpit8yqqppkun"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_286y2"]
-[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_1me4b"]
 [ext_resource type="PackedScene" uid="uid://bqle8c5qyu2nc" path="res://scenes/experience_points.tscn" id="2_vyp04"]
 [ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="3_u0jdi"]
+[ext_resource type="Texture2D" uid="uid://xk4w34c8csxc" path="res://assets/sprites/shadow.png" id="4_1uhdw"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="4_gbnq4"]
+[ext_resource type="Texture2D" uid="uid://ck42dtevamlff" path="res://assets/sprites/Enemy/simple_enemy.png" id="4_y8ms1"]
+[ext_resource type="Script" path="res://scripts/hurtbox.gd" id="7_t5f1g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v57ch"]
-size = Vector2(128, 128)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hjifp"]
+radius = 23.0
+height = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5rrc"]
-size = Vector2(130, 130)
+size = Vector2(66, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik58f"]
+size = Vector2(20, 20.5808)
 
 [node name="Enemy" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_286y2")
 min = 1
 max = 5
@@ -20,14 +27,27 @@ experience_point_scene = ExtResource("2_vyp04")
 life = 10.0
 SPEED = 300.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.866667, 0.298039, 0.329412, 1)
-texture = ExtResource("2_1me4b")
+[node name="Body" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("4_y8ms1")
+offset = Vector2(0, -8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_v57ch")
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-4, 29)
+scale = Vector2(4, 4)
+texture = ExtResource("4_1uhdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_hjifp")
 
 [node name="WhiteGun" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
+visible = false
 script = ExtResource("3_u0jdi")
 hitbox = NodePath("Hitbox")
 damage = 1.0
@@ -38,4 +58,15 @@ belongsToEnemy = true
 script = ExtResource("4_gbnq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WhiteGun/Hitbox"]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_h5rrc")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("7_t5f1g")
+belongs_to_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1.13939e-06, -24.5)
+rotation = -3.14159
+scale = Vector2(2.99996, -5.39337)
+shape = SubResource("RectangleShape2D_ik58f")

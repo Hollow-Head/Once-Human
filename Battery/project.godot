@@ -59,7 +59,13 @@ Pause={
 ]
 }
 
+[layer_names]
+
+avoidance/canvas_textures/default_texture_filter=0
+avoidance/defaults/default_clear_color=Color(0.979014, 0.838512, 0.576711, 1)
+
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.979014, 0.838512, 0.576711, 1)

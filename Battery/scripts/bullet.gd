@@ -4,7 +4,7 @@ extends Weapon
 
 class_name Bullet
 
-@export_range(1, 10000) var speed : int = 800
+@export_range(1, 10000) var speed : int = 1600
 @export var hitbox : Hitbox
 
 var direction : Vector2

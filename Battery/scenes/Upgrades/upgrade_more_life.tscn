@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwmipevwkgksq"]
+
+[ext_resource type="Texture2D" uid="uid://n4ahpwm4ig4q" path="res://assets/sprites/Upgrades/upgradeUI.png" id="1_hah8t"]
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_n3vr3"]
+[ext_resource type="Texture2D" uid="uid://clr7u661xhhxk" path="res://assets/sprites/Upgrades/more_life.png" id="2_xhqc2"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="3_rib0h"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lb2ov"]
+color = Color(0, 0, 0, 0)
+
+[node name="More Life" type="Panel"]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -852.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n3vr3")
+upgrade = 1
+is_quantity = true
+quantity = 2
+
+[node name="Fundo" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 450.0
+texture = ExtResource("1_hah8t")
+
+[node name="Icon" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 99.0
+offset_right = 231.0
+offset_bottom = 247.0
+texture = ExtResource("2_xhqc2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 269.0
+offset_right = 266.0
+offset_bottom = 417.0
+theme_override_fonts/normal_font = ExtResource("3_rib0h")
+bbcode_enabled = true
+text = "Você ganha [QUANTITY] corações a mais."
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 447.635
+theme_override_styles/focus = SubResource("StyleBoxLine_lb2ov")
+flat = true

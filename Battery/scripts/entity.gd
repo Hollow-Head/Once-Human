@@ -4,6 +4,7 @@ class_name Entity
 
 @export var life := 0.0
 @export var SPEED := 0.0
+@export var hurtbox : Area2D
 var current_speed : float
 
 ## Knockback variables
@@ -29,7 +30,7 @@ func _process(delta):
 	if life <= 0:
 		dead.emit()
 
-func isInKnockbackState():
+func is_in_knockback_state():
 	return _inKnockbackState
 
 func receive_damage(body : Node2D, damage : float, direction : Vector2, knockbackForce : float):

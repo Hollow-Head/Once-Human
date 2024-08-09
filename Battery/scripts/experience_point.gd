@@ -4,6 +4,7 @@ class_name ExperiencePoint
 
 @export_range(1, 100000) var quantityOfPoints := 1
 
+## The speed that orbits the Player
 @export var SPEED := 0.0
 var current_speed : float
 
@@ -12,7 +13,7 @@ var distance_to_player : float
 
 var _throw_state : bool
 var _throw_direction : Vector2
-var _throw_speed : float = 300.0
+var _throw_speed : float = 250.0
 var _random_force : float
 var _throw_deceleration : float = 200.0
 
@@ -44,11 +45,11 @@ func _pick_up():
 
 func throw_to_random_direction(min := 0, max := 360):
 	if min > max:
-		printerr("The MINUMUM value can't be greater than maximum value")
+		printerr("The MINIMUM value can't be greater than maximum value")
 		get_tree().quit(-1)
 	
 	_throw_state = true
 	var angle = deg_to_rad(Global.rng.randi_range(min, max))
 	_throw_direction = Vector2.from_angle(angle)
 	
-	_random_force = Global.rng.randf_range(1.0, 2.5)
+	_random_force = Global.rng.randf_range(1.0, 2.0)

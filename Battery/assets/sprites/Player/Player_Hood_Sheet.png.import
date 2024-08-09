@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3qylpc20yr2"
-path="res://.godot/imported/whiteGun.png-7285db51eec0c3ba9b364b6465a4e76f.ctex"
+uid="uid://drowe5mg4lolp"
+path="res://.godot/imported/Player_Hood_Sheet.png-29dec285c961321e41bd088293563780.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/nodeIcons/whiteGun.png"
-dest_files=["res://.godot/imported/whiteGun.png-7285db51eec0c3ba9b364b6465a4e76f.ctex"]
+source_file="res://assets/sprites/Player/Player_Hood_Sheet.png"
+dest_files=["res://.godot/imported/Player_Hood_Sheet.png-29dec285c961321e41bd088293563780.ctex"]
 
 [params]
 

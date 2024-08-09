@@ -1,22 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4lk855jaitt6"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_3pdl0"]
-[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_m7gnm"]
+[ext_resource type="Texture2D" uid="uid://7u265wity8hl" path="res://assets/sprites/Weapons/bullet/bullet.png" id="2_ljvji"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_62tlg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cr4ll"]
-size = Vector2(76, 22)
+size = Vector2(8, 4)
 
 [node name="Simple Bullet" type="Node2D" node_paths=PackedStringArray("hitbox")]
+scale = Vector2(4, 4)
 script = ExtResource("1_3pdl0")
 hitbox = NodePath("Hitbox")
 damage = 2.0
 knockbackForce = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.6, 0.175)
-texture = ExtResource("2_m7gnm")
+texture = ExtResource("2_ljvji")
 
 [node name="Hitbox" type="Area2D" parent="."]
 script = ExtResource("3_62tlg")

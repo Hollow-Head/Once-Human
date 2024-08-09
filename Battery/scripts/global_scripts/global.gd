@@ -24,11 +24,14 @@ func pause(the_caller : Node):
 
 func resume():
 	_who_called_pause = null
-	_is_paused = true
+	_is_paused = false
 	emit_signal("paused_changed", _is_paused)
 
 func is_paused() -> bool:
 	return _is_paused
+
+func get_the_pause_caller() -> Node:
+	return _who_called_pause
 
 func linear_function(min : float, max : float, value : float) -> float:
 	## Formula de uma função linear
@@ -40,6 +43,9 @@ func linear_function(min : float, max : float, value : float) -> float:
 	## FORMULA PRA ACHAR A PORCENTAGEM: x = y - b / m 
 	var result : float = (value - b) / m
 	return result
+
+func round_place(num,places) -> float:
+	return (round(num * pow(10, places)) / pow(10, places))
 
 #
 ## MAKE A FUNCTION THAT FADES TIME SPEED TO THE WISHED TIME SPEED

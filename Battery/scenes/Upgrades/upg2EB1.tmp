@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://2fp4xsci7wx2"]
+
+[ext_resource type="Texture2D" uid="uid://n4ahpwm4ig4q" path="res://assets/sprites/Upgrades/upgradeUI.png" id="1_odp02"]
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_xncf8"]
+[ext_resource type="Texture2D" uid="uid://b5dtfuo1qtu2p" path="res://assets/sprites/Upgrades/more_damage.png" id="2_vobq0"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="3_hgd3f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axsto"]
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="More Damage" type="Panel"]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+script = ExtResource("1_xncf8")
+upgrade = 3
+is_percentage = true
+percentage = 50
+
+[node name="Fundo" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 450.0
+texture = ExtResource("1_odp02")
+
+[node name="Icon" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 95.0
+offset_right = 237.0
+offset_bottom = 243.0
+texture = ExtResource("2_vobq0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 269.0
+offset_right = 266.0
+offset_bottom = 417.0
+theme_override_fonts/normal_font = ExtResource("3_hgd3f")
+bbcode_enabled = true
+text = "Voce irá dar [PERCENTAGE]% a mais de dano."
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 447.635
+theme_override_styles/focus = SubResource("StyleBoxFlat_axsto")
+flat = true

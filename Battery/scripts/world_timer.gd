@@ -16,19 +16,26 @@ func _paused_changed(is_paused : bool):
 
 func _time_changed(time_speed : float):
 	if not is_stopped():
+		#print("Time before: " + str(wait_time))
 		if _last_time_speed < 1:
 			start(adjusted_time(time_left, _last_time_speed * 100))
 		else:
 			start(adjusted_time(time_left, (1 / _last_time_speed)))
 		start(adjusted_time(time_left, time_speed))
 		_last_time_speed = time_speed
+		#print("Time after: " + str(wait_time))
+		#print("-----------------------------------")
 
 func _timeout():
 	start(adjusted_time(the_wait_time, Global.get_time_speed()))
 
-func the_start(wait_time := 0.0):
-	the_wait_time = wait_time
+func the_start(wait_time := -1.0):
+	if wait_time < 0:
+		the_wait_time = self.wait_time
+	else:
+		the_wait_time = wait_time
 	start(the_wait_time)
 
 func adjusted_time(time_left : float, time_speed : float) -> float:
+	#print(str(time_left) + "/" + str(time_speed))
 	return time_left / time_speed

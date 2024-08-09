@@ -14,4 +14,5 @@ func _physics_process(delta):
 		set_physics_process(false)
 		return
 	if Input.is_action_just_pressed("Attack"):
+		Camera.shake_camera(7.5)
 		hitbox.attack_enemy(damage, knockbackForce)

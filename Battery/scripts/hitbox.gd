@@ -14,25 +14,25 @@ func _ready():
 	belongsToEnemy = get_parent().belongsToEnemy
 	
 	if belongsToEnemy:
-		connect("body_entered", body_entered)
+		connect("area_entered", area_entered)
 		_damage = get_parent().damage
 		_knockbackForce = get_parent().knockbackForce
 
 func attack_enemy(damage : float, knockbackForce : float) -> void:
-	var bodies = get_overlapping_bodies()
-	for body in bodies:
-		if body.is_in_group("Enemy"):
-			var direction = get_parent().global_position.direction_to(body.global_position)
-			body.receive_damage(self, damage, direction, knockbackForce)
+	var areas = get_overlapping_areas()
+	for area in areas:
+		if area.is_in_group("Enemy Hurtbox"):
+			var direction = get_parent().global_position.direction_to(area.global_position)
+			area.receive_damage(self, damage * Player.player.damage_modifier, direction, knockbackForce)
 
 func bullet_attack_enemy(damage : float, knockbackForce : float) -> void:
-	var bodies = get_overlapping_bodies()
-	for body in bodies:
-		if body.is_in_group("Enemy"):
-			body.receive_damage(self, damage, get_parent().direction, knockbackForce)
+	var areas = get_overlapping_areas()
+	for area in areas:
+		if area.is_in_group("Enemy Hurtbox"):
+			area.receive_damage(self, damage * Player.player.damage_modifier, get_parent().direction, knockbackForce)
 			get_parent().queue_free()
 
-func body_entered(body : Node2D):
-	if "Player" in body.name:
-		var direction = get_parent().global_position.direction_to(body.global_position)
-		body.receive_damage(self, _damage, direction, _knockbackForce)
+func area_entered(area : Area2D):
+	if area.is_in_group("Player Hurtbox"):
+		var direction = get_parent().global_position.direction_to(area.global_position)
+		area.receive_damage(self, _damage, direction, _knockbackForce)

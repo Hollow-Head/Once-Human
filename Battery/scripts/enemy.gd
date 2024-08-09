@@ -10,6 +10,8 @@ var direction : Vector2
 @export_range(0, 10000) var max := 10
 @export var experience_point_scene : PackedScene
 
+@onready var bodySprite : Sprite2D = $Body
+
 func _ready():
 	add_to_group("Enemy")
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -25,7 +27,12 @@ func _physics_process(delta):
 	if Global.is_paused():
 		return
 	
-	if not isInKnockbackState():
+	if Player.player.global_position.x < global_position.x:
+		bodySprite.flip_h = false
+	else:
+		bodySprite.flip_h = true
+	
+	if not is_in_knockback_state():
 		direction = global_position.direction_to(Player.player.global_position)
 		velocity = current_speed * direction
 	else:

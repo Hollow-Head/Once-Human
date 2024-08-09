@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1ma2f3fnqpd5"]
+
+[ext_resource type="PackedScene" uid="uid://2fp4xsci7wx2" path="res://scenes/Upgrades/upgrade_more_damage.tscn" id="1_rqf3f"]
+[ext_resource type="PackedScene" uid="uid://bwmipevwkgksq" path="res://scenes/Upgrades/upgrade_more_life.tscn" id="2_yqohk"]
+[ext_resource type="PackedScene" uid="uid://dihokau0ro3h" path="res://scenes/Upgrades/upgrade_more_speed.tscn" id="3_2cdmm"]
+[ext_resource type="PackedScene" uid="uid://clakvgjptrt2s" path="res://scenes/Upgrades/upgrade_more_xp.tscn" id="4_p325f"]
+
+[node name="Upgrade UI" type="Node2D"]
+z_index = 10
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="More Damage" parent="GridContainer" instance=ExtResource("1_rqf3f")]
+layout_mode = 2
+
+[node name="More Life" parent="GridContainer" instance=ExtResource("2_yqohk")]
+layout_mode = 2
+
+[node name="More Speed" parent="GridContainer" instance=ExtResource("3_2cdmm")]
+layout_mode = 2
+
+[node name="More XP" parent="GridContainer" instance=ExtResource("4_p325f")]
+layout_mode = 2
