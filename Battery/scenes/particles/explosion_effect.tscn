@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhjcnt4k4yxm2"]
+
+[ext_resource type="Script" path="res://scripts/one_shot_particle.gd" id="1_8d0bb"]
+
+[sub_resource type="Gradient" id="Gradient_yel7b"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.254902, 0, 1, 1, 0.380392, 0, 1, 1, 0.85098, 0, 1)
+
+[node name="explosion_effect" type="Node2D" node_paths=PackedStringArray("particle")]
+script = ExtResource("1_8d0bb")
+particle = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 53
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.8
+initial_velocity_max = 200.0
+scale_amount_min = 10.0
+scale_amount_max = 30.0
+color_ramp = SubResource("Gradient_yel7b")

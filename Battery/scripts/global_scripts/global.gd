@@ -12,6 +12,9 @@ signal time_changed(time_speed : float)
 var _time_speed := 1.0
 var _player_time_speed := 1.0
 
+@onready var hit_particle_scene : PackedScene = preload("res://scenes/particles/hit_effect.tscn")
+@onready var explosion_particle_scene : PackedScene = preload("res://scenes/particles/explosion_effect.tscn")
+
 func _process(delta):
 	if Input.is_action_just_pressed("Pause"):
 		_is_paused = !_is_paused

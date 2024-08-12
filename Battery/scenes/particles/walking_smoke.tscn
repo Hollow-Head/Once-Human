@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c732kpmoirnfv"]
+[gd_scene load_steps=8 format=3 uid="uid://c732kpmoirnfv"]
 
-[ext_resource type="Texture2D" uid="uid://c3nmp5invqesy" path="res://assets/sprites/Player/Smoke_Sheet.png" id="1_nsop8"]
-[ext_resource type="Script" path="res://scripts/smoke.gd" id="1_pj5k0"]
+[ext_resource type="Script" path="res://scripts/one_shot_particle.gd" id="1_6kjxb"]
+[ext_resource type="Texture2D" uid="uid://c3nmp5invqesy" path="res://assets/sprites/Player/Smoke_Sheet.png" id="2_8o5ea"]
+
+[sub_resource type="Gradient" id="Gradient_6n77i"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.717647)
+
+[sub_resource type="Gradient" id="Gradient_554np"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_5ylo2"]
 resource_name = "Exist"
@@ -64,15 +70,38 @@ _data = {
 "RESET": SubResource("Animation_5n4x7")
 }
 
-[node name="Smoke" type="Node2D"]
+[node name="Walking Smoke" type="Node2D" node_paths=PackedStringArray("particle")]
 z_index = -1
 y_sort_enabled = true
-script = ExtResource("1_pj5k0")
+script = ExtResource("1_6kjxb")
+particle = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.35
+emission_shape = 1
+emission_sphere_radius = 16.82
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+tangential_accel_min = -100.0
+scale_amount_min = 5.0
+scale_amount_max = 25.0
+color_ramp = SubResource("Gradient_6n77i")
+color_initial_ramp = SubResource("Gradient_554np")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 scale = Vector2(4, 4)
-texture = ExtResource("1_nsop8")
+texture = ExtResource("2_8o5ea")
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

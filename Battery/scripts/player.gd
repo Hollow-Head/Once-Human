@@ -38,7 +38,7 @@ var changed_y_hood : bool
 
 var is_running_backwards : bool
 
-var smokeScene : PackedScene = preload("res://scenes/smoke.tscn")
+var smokeScene : PackedScene = preload("res://scenes/particles/walking_smoke.tscn")
 @onready var smokeTimer : GlobalTimer = $"Make Smoke"
 
 func _ready():
@@ -52,7 +52,6 @@ func _ready():
 func _physics_process(delta):
 	if Global.is_paused():
 		return
-	
 	
 	if get_global_mouse_position().x < global_position.x:
 		if mouse_direction.x > 0:
@@ -270,6 +269,6 @@ func get_experience_points() -> int:
 
 func _on_make_smoke_timeout():
 	var smoke = smokeScene.instantiate()
+	smoke.particle.direction = -direction
 	smoke.global_position = $Foot.global_position
-	smoke.backwards = is_running_backwards
 	get_node("/root/Main/").add_child(smoke)

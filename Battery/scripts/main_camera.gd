@@ -17,6 +17,7 @@ static var shake_strength : float = 0.0
 
 func _ready():
 	camera = self
+	Engine.max_fps = 60
 
 func _process(delta):
 	if Global.is_paused():

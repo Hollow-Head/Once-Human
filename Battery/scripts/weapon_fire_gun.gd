@@ -5,7 +5,7 @@ extends Weapon
 class_name FireGun
 
 @export var bulletScene : PackedScene
-@export var gunBarrel : Marker2D
+@export var gun_barrel : Marker2D
 var direction : Vector2
 
 func _physics_process(delta):
@@ -20,7 +20,5 @@ func _physics_process(delta):
 
 func shoot(direction : Vector2):
 	var bullet : Bullet = bulletScene.instantiate()
-	bullet.shoot(direction, belongsToEnemy)
-	bullet.global_position = gunBarrel.global_position
-	bullet.look_at(get_global_mouse_position())
+	bullet.shoot(gun_barrel.global_position, direction, belongsToEnemy)
 	get_node("/root/Main/").add_child(bullet)

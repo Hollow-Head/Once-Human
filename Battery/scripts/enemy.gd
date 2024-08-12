@@ -50,4 +50,7 @@ func _kill():
 		experience_point.global_position = global_position
 		experience_point.throw_to_random_direction()
 		get_node("/root/Main/").add_child(experience_point)
+		var explosion = Global.explosion_particle_scene.instantiate()
+		explosion.global_position = global_position
+		get_node("/root/Main/").add_child(explosion)
 	queue_free()

@@ -27,6 +27,7 @@ func _init():
 func _process(delta):
 	if Global.is_paused():
 		return
+	
 	if life <= 0:
 		dead.emit()
 
@@ -43,6 +44,10 @@ func receive_knockback(direction : Vector2, knockbackForce : float):
 	self.knockbackForce = knockbackForce
 	if not "Player" in name:
 		_knockbackTimer.start(_knockbackTimer.adjusted_time(_knockbackDelay, Global.get_time_speed()))
+		var hit_effect = Global.hit_particle_scene.instantiate()
+		get_node("/root/Main/").add_child(hit_effect)
+		hit_effect.global_position = global_position
+		hit_effect.particle.direction = direction
 	else:
 		_knockbackTimer.start(_knockbackTimer.adjusted_time(_knockbackDelay, Global.get_player_time_speed()))
 

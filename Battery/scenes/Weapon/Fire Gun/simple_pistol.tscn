@@ -4,14 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://d4lk855jaitt6" path="res://scenes/Weapon/Bullet/simple_bullet.tscn" id="2_1kow7"]
 [ext_resource type="Texture2D" uid="uid://c5d1dydybjikm" path="res://assets/sprites/Weapons/fire_gun/cyber_pistol.png" id="3_yphqw"]
 
-[node name="Simple Pistol" type="Node2D" node_paths=PackedStringArray("gunBarrel")]
+[node name="Simple Pistol" type="Node2D" node_paths=PackedStringArray("gun_barrel")]
 scale = Vector2(3, 3)
 script = ExtResource("1_c16pb")
 bulletScene = ExtResource("2_1kow7")
-gunBarrel = NodePath("Marker2D")
+gun_barrel = NodePath("Marker2D")
+radius = null
+attackDelay = null
+damage = null
+knockbackForce = null
+belongsToEnemy = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_yphqw")
+flip_h = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-8, -3)
+position = Vector2(7, -3)
