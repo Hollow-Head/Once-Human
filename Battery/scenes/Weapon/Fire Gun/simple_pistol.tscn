@@ -9,11 +9,8 @@ scale = Vector2(3, 3)
 script = ExtResource("1_c16pb")
 bulletScene = ExtResource("2_1kow7")
 gun_barrel = NodePath("Marker2D")
-radius = null
-attackDelay = null
-damage = null
-knockbackForce = null
-belongsToEnemy = null
+max_ammo = 12
+reload_delay = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_yphqw")

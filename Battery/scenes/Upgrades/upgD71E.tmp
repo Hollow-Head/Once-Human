@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://clakvgjptrt2s" path="res://scenes/Upgrades/upgrade_more_xp.tscn" id="4_p325f"]
 
 [node name="Upgrade UI" type="Node2D"]
-z_index = 30
+z_index = 10
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_m5ech")
 

@@ -16,9 +16,14 @@ var button : Button
 var initial_scale : Vector2
 var initial_z_index : int
 
+var highlight : NinePatchRect
+
 func _ready():
+	highlight = Global.update_highlight_scene.instantiate()
+	
 	initial_z_index = z_index
 	initial_scale = scale
+	
 	for child in get_children():
 		if child is Button:
 			button = child
@@ -52,12 +57,19 @@ func compile_text(text : String) -> String:
 	return ""
 
 func _button_pressed():
+	if highlight.is_inside_tree():
+		remove_child(highlight)
 	Upgrades.choose_upgrade(upgrade, percentage, quantity)
 
 func _mouse_entered():
+	highlight = Global.update_highlight_scene.instantiate()
+	if not highlight.is_inside_tree():
+		add_child(highlight)
 	z_index = 20
 	scale *= 1.2
 
 func _mouse_exited():
+	if highlight.is_inside_tree():
+		remove_child.call_deferred(highlight)
 	z_index = initial_z_index
 	scale = initial_scale

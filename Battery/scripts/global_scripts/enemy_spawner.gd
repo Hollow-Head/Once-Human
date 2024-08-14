@@ -3,6 +3,11 @@ extends Node
 var _spawnTimer := GlobalTimer.new()
 var spawnDelay : float = 1.5
 
+var _x := 0
+var _spawn_rate_timer := GlobalTimer.new()
+var _spawn_rate : int
+var _update_rate_delay := 60
+
 var rng := RandomNumberGenerator.new()
 
 var cameraRect : Rect2
@@ -12,16 +17,24 @@ var enemyScene = preload("res://scenes/Enemies/enemy.tscn")
 enum directionToSpawn{LEFT, RIGHT, UP, DOWN}
 
 func _ready():
+	Global.game_scene_entered_tree.connect(_game_scene_entered)
+	Global.game_scene_exited_tree.connect(_game_scene_exited)
+	
 	add_child(_spawnTimer)
 	_spawnTimer.timeout.connect(_spawnTimerTimeout)
-	_spawnTimer.the_start(spawnDelay)
+	
+	add_child(_spawn_rate_timer)
+	_spawn_rate_timer.timeout.connect(_spawn_rate_timeout)
+	_update_spawn_rate()
 
 func _spawnTimerTimeout():
-	spawnOutsideCameraRandom()
+	for n in _spawn_rate:
+		spawnOutsideCameraRandom()
 
 func updateCameraRect():
 	cameraRect = Player.player.get_viewport_rect()
 	cameraRect.position = Player.player.global_position
+	cameraRect.size /= Camera.camera.zoom
 
 func spawnOutsideCameraRandom():
 	updateCameraRect()
@@ -53,9 +66,10 @@ func spawnOutsideCameraRandom():
 			var maxX = cameraRect.position.x + (cameraRect.size.x / 2)
 			enemy.global_position = Vector2(rng.randi_range(minX, maxX), downPos)
 	
-	get_node("/root/Main/").add_child(enemy)
+	get_tree().current_scene.add_child(enemy)
 
 func start(spawnDelay : float) -> void:
+	_spawnTimer.paused = false
 	self.spawnDelay = spawnDelay
 	_spawnTimer.start(spawnDelay)
 
@@ -64,3 +78,18 @@ func stop() -> void:
 
 func resume() -> void:
 	_spawnTimer.paused = false
+
+func _update_spawn_rate():
+	#f(x) = 2 * x + 1
+	_spawn_rate = (2 * _x) + 1
+	_spawn_rate_timer.the_start(_update_rate_delay)
+	_x += 1
+
+func _spawn_rate_timeout():
+	_update_spawn_rate()
+
+func _game_scene_entered():
+	start(spawnDelay)
+
+func _game_scene_exited():
+	stop()

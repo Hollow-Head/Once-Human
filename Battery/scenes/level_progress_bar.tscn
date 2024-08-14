@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://duhmovg1a2s5k"]
+
+[ext_resource type="Texture2D" uid="uid://035iu41p0xqu" path="res://assets/sprites/ui/level_progress_bar_empty.png" id="1_nm11d"]
+[ext_resource type="Texture2D" uid="uid://di0esce18ta74" path="res://assets/sprites/ui/level_progress_bar_full.png" id="2_ccpy6"]
+[ext_resource type="Script" path="res://scripts/level_progress_bar.gd" id="3_b8f3h"]
+[ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="4_byqcy"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_right = 240.0
+offset_bottom = 128.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_nm11d")
+texture_progress = ExtResource("2_ccpy6")
+script = ExtResource("3_b8f3h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_left = 52.5
+offset_right = 122.5
+offset_bottom = 67.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_byqcy")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1qw3gvmn3di3"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_hevhw"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="2_hyv1q"]
+[ext_resource type="Texture2D" uid="uid://dvopjmeiykpg" path="res://assets/sprites/ui/life.png" id="3_c6nxr"]
+[ext_resource type="PackedScene" uid="uid://duhmovg1a2s5k" path="res://scenes/level_progress_bar.tscn" id="4_ruaqd"]
+
+[node name="UI" type="Node2D"]
+z_index = 15
+script = ExtResource("1_hevhw")
+
+[node name="AmmoUI" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Ammo" type="RichTextLabel" parent="AmmoUI"]
+z_index = 15
+offset_right = 335.0
+offset_bottom = 48.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_hyv1q")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Interface" type="Node2D" parent="."]
+
+[node name="LifeUI" type="Node2D" parent="Interface"]
+position = Vector2(10, 10)
+scale = Vector2(3, 3)
+
+[node name="Life" type="Sprite2D" parent="Interface/LifeUI"]
+texture = ExtResource("3_c6nxr")
+centered = false
+
+[node name="Control" type="Control" parent="Interface/LifeUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 15.6
+offset_right = 16.0
+offset_bottom = 16.6
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface/LifeUI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -3.5
+offset_right = 2.5
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Life" type="RichTextLabel" parent="Interface/LifeUI/Control/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.243137)
+theme_override_fonts/normal_font = ExtResource("2_hyv1q")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureProgressBar" parent="." instance=ExtResource("4_ruaqd")]

@@ -30,14 +30,14 @@ func show_upgrades() -> void:
 		return
 	Global.pause(self)
 	_is_showing_upgrades = true
-	get_node("/root/Main/").add_child(upgradeNode)
-	upgradeNode.global_position = Camera.camera.global_position
-	upgradeNode.global_position.y -= 225
+	get_tree().current_scene.add_child(upgradeNode)
+	#upgradeNode.global_position = Camera.camera.global_position# / Camera.camera.zoom
+	#upgradeNode.global_position.y -= (225 * upgradeNode.scale.y) / Camera.camera.zoom.y
 
 func hide_upgrades() -> void:
 	_is_showing_upgrades = false
 	Global.resume()
-	get_node("/root/Main/").remove_child(upgradeNode)
+	get_tree().current_scene.remove_child(upgradeNode)
 
 func choose_upgrade(choice : int, percentage : int = 0, quantity : int = 0):
 	match choice:

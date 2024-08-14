@@ -7,9 +7,9 @@ var direction
 static var player : CharacterBody2D
 
 var level := 0
-var _points_to_level_up : int
+static var _points_to_level_up : int
 var _x := 1
-var _experiencePoints = 0.0
+static var _experiencePoints = 0.0
 
 var speed_modifier := 1.0
 var xp_modifier := 1.0
@@ -18,6 +18,8 @@ var damage_modifier := 1.0
 @export var accel : float = 7.5
 
 @export_range(0, 10000) var pickRadius := 0
+
+@export var weapon : Weapon
 
 @onready var bodySprite : Sprite2D = $Body
 @onready var bodyAnimation : AnimationPlayer = $Body/AnimationPlayer
@@ -39,15 +41,22 @@ var changed_y_hood : bool
 var is_running_backwards : bool
 
 var smokeScene : PackedScene = preload("res://scenes/particles/walking_smoke.tscn")
-@onready var smokeTimer : GlobalTimer = $"Make Smoke"
+@onready var smokeTimer := GlobalTimer.new() 
 
 func _ready():
+	_experiencePoints = 0
 	_calculate_next_level()
 	
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	player = self
 	
 	current_speed = SPEED
+	
+	add_child(smokeTimer)
+	smokeTimer.timeout.connect(_smoke_timeout)
+	smokeTimer.the_start(0.2)
+	
+	dead.connect(_dead_signal)
 
 func _physics_process(delta):
 	if Global.is_paused():
@@ -262,13 +271,19 @@ func _level_up():
 func add_experience_points(quantity_of_points : float) -> void:
 	_experiencePoints += quantity_of_points * xp_modifier
 	_check_level_up()
-	 
 
-func get_experience_points() -> int:
+static func get_experience_points() -> int:
 	return _experiencePoints
 
-func _on_make_smoke_timeout():
+static func get_points_to_level_up() -> int:
+	return _points_to_level_up
+
+func _dead_signal():
+	Global.pause(self)
+	get_tree().current_scene.add_child(Global.death)
+
+func _smoke_timeout():
 	var smoke = smokeScene.instantiate()
 	smoke.particle.direction = -direction
 	smoke.global_position = $Foot.global_position
-	get_node("/root/Main/").add_child(smoke)
+	get_tree().current_scene.add_child(smoke)

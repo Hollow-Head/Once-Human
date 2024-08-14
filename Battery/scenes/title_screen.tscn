@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcfytd5p12qnb"]
+
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_dpqgg"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_default_cursor_shape = 7
+script = ExtResource("1_dpqgg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+color = Color(0.265361, 0.265361, 0.265361, 1)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -154.0
+offset_right = 100.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+theme_override_constants/v_separation = 25
+
+[node name="Jogar" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Jogar"
+
+[node name="Opcoes" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Opções"
+
+[node name="Sair" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Sair"
+
+[connection signal="pressed" from="GridContainer/Jogar" to="." method="_on_jogar_pressed"]
+[connection signal="pressed" from="GridContainer/Opcoes" to="." method="_on_opcoes_pressed"]
+[connection signal="pressed" from="GridContainer/Sair" to="." method="_on_sair_pressed"]

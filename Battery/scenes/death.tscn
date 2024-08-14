@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsm6skq6sqlmu"]
+
+[ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_6imcn"]
+[ext_resource type="Script" path="res://scripts/death.gd" id="1_k2x3i"]
+[ext_resource type="FontFile" uid="uid://bblo883y55tcn" path="res://assets/fonts/pixel_operator/PixelOperator-Bold.ttf" id="2_01cbx"]
+
+[node name="Death" type="Control"]
+z_index = 30
+layout_mode = 3
+anchors_preset = 0
+mouse_default_cursor_shape = 7
+script = ExtResource("1_k2x3i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+color = Color(0.266667, 0.266667, 0.266667, 0.513726)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -529.5
+offset_top = -124.0
+offset_right = 529.5
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_fonts/normal_font = ExtResource("1_6imcn")
+theme_override_font_sizes/normal_font_size = 93
+bbcode_enabled = true
+text = "Você morreu!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Sair" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.5
+offset_top = 26.0
+offset_right = 116.5
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_01cbx")
+theme_override_font_sizes/font_size = 120
+text = "Sair"
+
+[connection signal="pressed" from="Sair" to="." method="_on_sair_pressed"]

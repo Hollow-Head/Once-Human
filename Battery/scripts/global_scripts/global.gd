@@ -12,15 +12,41 @@ signal time_changed(time_speed : float)
 var _time_speed := 1.0
 var _player_time_speed := 1.0
 
+@onready var _game_scene : PackedScene = preload("res://scenes/game_scene.tscn")
+@onready var _title_scene : PackedScene = preload("res://scenes/title_screen.tscn")
+
+@onready var _pause_scene : PackedScene = preload("res://scenes/pause.tscn")
+var _pause : Control
+
+@onready var _death_scene : PackedScene = preload("res://scenes/death.tscn")
+var death : Control
+
 @onready var hit_particle_scene : PackedScene = preload("res://scenes/particles/hit_effect.tscn")
 @onready var explosion_particle_scene : PackedScene = preload("res://scenes/particles/explosion_effect.tscn")
+@onready var update_highlight_scene : PackedScene = preload("res://scenes/update_highlight.tscn")
+
+signal game_scene_entered_tree
+signal game_scene_exited_tree
+
+var _is_in_game : bool
+
+func _ready():
+	death = _death_scene.instantiate()
+	change_to_title_screen()
 
 func _process(delta):
-	if Input.is_action_just_pressed("Pause"):
-		_is_paused = !_is_paused
-		emit_signal("paused_changed", _is_paused)
+	if Input.is_action_just_pressed("Pause") and _is_in_game:
+		if not _is_paused:
+			pause(self)
+			_pause = _pause_scene.instantiate()
+			get_tree().current_scene.add_child(_pause)
+		elif get_the_pause_caller() == self:
+			_pause.queue_free()
+			resume()
 
 func pause(the_caller : Node):
+	if _who_called_pause != null:
+		return
 	_who_called_pause = the_caller
 	_is_paused = true
 	emit_signal("paused_changed", _is_paused)
@@ -35,6 +61,16 @@ func is_paused() -> bool:
 
 func get_the_pause_caller() -> Node:
 	return _who_called_pause
+
+func change_to_title_screen():
+	get_tree().call_deferred("change_scene_to_packed", _title_scene)
+	emit_signal("game_scene_exited_tree")
+	_is_in_game = false
+
+func change_to_game_screen():
+	get_tree().change_scene_to_packed(_game_scene)
+	emit_signal("game_scene_entered_tree")
+	_is_in_game = true
 
 func linear_function(min : float, max : float, value : float) -> float:
 	## Formula de uma função linear

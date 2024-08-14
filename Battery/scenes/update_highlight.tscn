@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs1icstgmr7gf"]
+
+[ext_resource type="Shader" path="res://shaders/highlight_item.gdshader" id="1_nkjmj"]
+[ext_resource type="Texture2D" uid="uid://c4myxj7551k14" path="res://assets/nothing.png" id="2_gjkh1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ua28n"]
+shader = ExtResource("1_nkjmj")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 0.7
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 8.0
+
+[node name="Update Highlight" type="NinePatchRect"]
+material = SubResource("ShaderMaterial_ua28n")
+offset_right = 300.0
+offset_bottom = 450.0
+texture = ExtResource("2_gjkh1")

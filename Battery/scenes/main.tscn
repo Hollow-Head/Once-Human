@@ -1,30 +1,3 @@
-[gd_scene load_steps=5 format=3 uid="uid://cblogtyku6h25"]
-
-[ext_resource type="Script" path="res://scripts/main_camera.gd" id="1_sfltn"]
-[ext_resource type="PackedScene" uid="uid://jslxb44t5xu0" path="res://scenes/player.tscn" id="1_xbvel"]
-[ext_resource type="Texture2D" uid="uid://dn8jp3nou4twl" path="res://assets/sprites/icon.svg" id="2_ybmwu"]
-
-[sub_resource type="Environment" id="Environment_ufhra"]
-background_mode = 3
-tonemap_mode = 1
-tonemap_white = 4.41
-adjustment_enabled = true
+[gd_scene format=3 uid="uid://cblogtyku6h25"]
 
 [node name="Main" type="Node2D"]
-
-[node name="Main Camera" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
-script = ExtResource("1_sfltn")
-
-[node name="Background" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.458824)
-z_index = -10
-position = Vector2(-45, 14.0001)
-scale = Vector2(12.5781, 8.6875)
-texture = ExtResource("2_ybmwu")
-
-[node name="Player" parent="." instance=ExtResource("1_xbvel")]
-position = Vector2(-402, -20)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ufhra")

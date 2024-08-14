@@ -5,6 +5,7 @@ class_name Entity
 @export var life := 0.0
 @export var SPEED := 0.0
 @export var hurtbox : Area2D
+@export var hit_anim : AnimationPlayer
 var current_speed : float
 
 ## Knockback variables
@@ -35,6 +36,7 @@ func is_in_knockback_state():
 	return _inKnockbackState
 
 func receive_damage(body : Node2D, damage : float, direction : Vector2, knockbackForce : float):
+	hit_anim.play("Hit")
 	life -= damage
 	receive_knockback(direction, knockbackForce)
 
@@ -45,7 +47,7 @@ func receive_knockback(direction : Vector2, knockbackForce : float):
 	if not "Player" in name:
 		_knockbackTimer.start(_knockbackTimer.adjusted_time(_knockbackDelay, Global.get_time_speed()))
 		var hit_effect = Global.hit_particle_scene.instantiate()
-		get_node("/root/Main/").add_child(hit_effect)
+		get_tree().current_scene.add_child(hit_effect)
 		hit_effect.global_position = global_position
 		hit_effect.particle.direction = direction
 	else:
