@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhl2cagdnyise"]
+
+[ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_t7e5e"]
+[ext_resource type="Texture2D" uid="uid://xgsamv2bojl2" path="res://assets/sprites/Upgrades/recycles_plastic.png" id="1_ujkn6"]
+[ext_resource type="Script" path="res://scripts/upgrade_tree.gd" id="1_v2xqi"]
+[ext_resource type="Texture2D" uid="uid://cksehovvbed6j" path="res://assets/sprites/Upgrades/recycles_glass.png" id="2_2ph17"]
+[ext_resource type="Texture2D" uid="uid://q6kspf32xsnl" path="res://assets/sprites/Upgrades/recycles_paper.png" id="3_qril4"]
+[ext_resource type="Texture2D" uid="uid://builnijmcyyh3" path="res://assets/sprites/Upgrades/recycles_metal.png" id="4_x2pha"]
+
+[node name="Upgrade Tree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v2xqi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -429.0
+offset_right = 429.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -8
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/normal_font = ExtResource("1_t7e5e")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "
+
+Árvore de Habilidade"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -75.0
+offset_right = 405.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -585
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 70
+columns = 4
+
+[node name="Plastic" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+icon = ExtResource("1_ujkn6")
+flat = true
+expand_icon = true
+
+[node name="Glass" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+icon = ExtResource("2_2ph17")
+flat = true
+expand_icon = true
+
+[node name="Paper" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+icon = ExtResource("3_qril4")
+flat = true
+expand_icon = true
+
+[node name="Metal" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+icon = ExtResource("4_x2pha")
+flat = true
+expand_icon = true

@@ -280,6 +280,7 @@ static func get_points_to_level_up() -> int:
 
 func _dead_signal():
 	Global.pause(self)
+	Global.death = Global._death_scene.instantiate()
 	get_tree().current_scene.add_child(Global.death)
 
 func _smoke_timeout():

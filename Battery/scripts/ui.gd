@@ -12,8 +12,9 @@ func _ready():
 
 func _process(delta):
 	if Global.is_paused():
-		ammo_text.text = "\n[wave amp=0.0 freq=0.0] " + str(Player.player.weapon.ammo) + "/" + str(
-			Player.player.weapon.max_ammo) + " [/wave]"
+		if is_fire_gun:
+			ammo_text.text = "\n[wave amp=0.0 freq=0.0] " + str(Player.player.weapon.ammo) + "/" + str(
+				Player.player.weapon.max_ammo) + " [/wave]"
 		return
 	
 	$Interface/LifeUI/Control/MarginContainer/Life.text = str(Player.player.life)
