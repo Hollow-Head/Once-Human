@@ -15,6 +15,11 @@ var speed_modifier := 1.0
 var xp_modifier := 1.0
 var damage_modifier := 1.0
 
+static var _plastic_items := 0
+static var _glass_items := 0
+static var _paper_items := 0
+static var _metal_items := 0
+
 @export var accel : float = 7.5
 
 @export_range(0, 10000) var pickRadius := 0
@@ -43,8 +48,18 @@ var is_running_backwards : bool
 var smokeScene : PackedScene = preload("res://scenes/particles/walking_smoke.tscn")
 @onready var smokeTimer := GlobalTimer.new() 
 
+var has_power := true
+var power_timer := GlobalTimer.new()
+var power_timer_delay := 60.0
+
 func _ready():
 	_experiencePoints = 0
+	
+	_plastic_items = 0
+	_glass_items = 0
+	_paper_items = 0
+	_metal_items = 0
+	
 	_calculate_next_level()
 	
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -56,11 +71,21 @@ func _ready():
 	smokeTimer.timeout.connect(_smoke_timeout)
 	smokeTimer.the_start(0.2)
 	
+	add_child(power_timer)
+	power_timer.timeout.connect(_power_timeout)
+	
 	dead.connect(_dead_signal)
 
 func _physics_process(delta):
 	if Global.is_paused():
 		return
+	
+	## HORRIBLE way to do this, but I don't have time
+	# #GAMBIARRA
+	if $Hit.is_playing():
+		invulnerable = true
+	else:
+		invulnerable = false
 	
 	if get_global_mouse_position().x < global_position.x:
 		if mouse_direction.x > 0:
@@ -87,11 +112,13 @@ func _physics_process(delta):
 		mouse_direction.y = -1
 	
 	## REMOVE THIS LATER
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("Power") and has_power:
 		Camera.shake_camera(30)
 		var groupMember = get_tree().get_nodes_in_group("Enemy")
 		for n in groupMember:
 			n.life = 0
+		has_power = false
+		power_timer.the_start(power_timer_delay)
 	
 	if not is_in_knockback_state():
 		#direction = Input.get_vector("Move Left", "Move Right", "Move Up", "Move Down")
@@ -266,7 +293,7 @@ func _check_level_up():
 
 func _level_up():
 	Upgrades.show_upgrades()
-	print("Leveled up to " + str(level))
+	#print("Leveled up to " + str(level))
 
 func add_experience_points(quantity_of_points : float) -> void:
 	_experiencePoints += quantity_of_points * xp_modifier
@@ -278,6 +305,30 @@ static func get_experience_points() -> int:
 static func get_points_to_level_up() -> int:
 	return _points_to_level_up
 
+static func add_plastic_items(quantity : int) -> void:
+	_plastic_items += quantity
+
+static func add_glass_items(quantity : int) -> void:
+	_glass_items += quantity
+
+static func add_paper_items(quantity : int) -> void:
+	_paper_items += quantity
+
+static func add_metal_items(quantity : int) -> void:
+	_metal_items += quantity
+
+static func get_plastic_items() -> int:
+	return _plastic_items
+
+static func get_glass_items() -> int:
+	return _glass_items
+
+static func get_paper_items() -> int:
+	return _paper_items
+
+static func get_metal_items() -> int:
+	return _metal_items
+
 func _dead_signal():
 	Global.pause(self)
 	Global.death = Global._death_scene.instantiate()
@@ -288,3 +339,7 @@ func _smoke_timeout():
 	smoke.particle.direction = -direction
 	smoke.global_position = $Foot.global_position
 	get_tree().current_scene.add_child(smoke)
+
+func _power_timeout():
+	has_power = true
+	power_timer.stop()

@@ -35,9 +35,11 @@ func _process(delta):
 	
 	#global_position = Player.player.global_position
 	global_position = global_position.lerp(Player.player.global_position, 10 * delta)
-	
-	_relative_mouse = Player.player.global_position + get_viewport().get_mouse_position() - Vector2(get_viewport().size / 2)
-	_direction = Player.player.global_position.direction_to(_relative_mouse)
+	if get_window().mode == Window.MODE_WINDOWED:
+		_relative_mouse = Player.player.global_position + get_viewport().get_mouse_position() - Vector2(get_viewport().size / 2)
+	else:
+		_relative_mouse = Player.player.global_position + get_viewport().get_mouse_position() - Vector2(get_viewport().size / 3.5)
+	_direction = Player.player.global_position.direction_to(_relative_mouse) / zoom
 	_distance = Player.player.global_position.distance_to(_relative_mouse)
 	if _distance > radius:
 		_distance = radius

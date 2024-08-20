@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi6r3tnedmesr"]
+
+[ext_resource type="Script" path="res://scripts/end.gd" id="1_53p1d"]
+[ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="2_72vla"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="3_m5rlv"]
+
+[node name="End" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_53p1d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[node name="OMG" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -554.0
+offset_top = -176.195
+offset_right = 554.0
+offset_bottom = -114.195
+mouse_default_cursor_shape = 7
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_fonts/normal_font = ExtResource("2_72vla")
+theme_override_font_sizes/normal_font_size = 61
+text = "Você salvou o mundo!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -20.0
+offset_right = 124.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+theme_override_fonts/normal_font = ExtResource("3_m5rlv")
+theme_override_font_sizes/normal_font_size = 30
+text = "Não tem parabéns, tchau tchau!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -100.0
+offset_top = 100.73
+offset_right = 100.0
+offset_bottom = 200.73
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_m5rlv")
+theme_override_font_sizes/font_size = 20
+text = "Sair"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

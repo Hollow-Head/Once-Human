@@ -1,0 +1,122 @@
+[gd_scene load_steps=17 format=3 uid="uid://225n43fhmbcu"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_7vda5"]
+[ext_resource type="Shader" path="res://shaders/hit.gdshader" id="2_iw0tt"]
+[ext_resource type="PackedScene" uid="uid://bqle8c5qyu2nc" path="res://scenes/drops/experience_point.tscn" id="2_phst6"]
+[ext_resource type="PackedScene" uid="uid://d33qixmsjognf" path="res://scenes/drops/paper_drop.tscn" id="3_52vbi"]
+[ext_resource type="Texture2D" uid="uid://28asq1h6t1wx" path="res://assets/sprites/Enemy/simple_enemy_blue.png" id="3_gam7h"]
+[ext_resource type="Texture2D" uid="uid://xk4w34c8csxc" path="res://assets/sprites/shadow.png" id="4_r73xs"]
+[ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="5_nb68l"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="6_wseuj"]
+[ext_resource type="Script" path="res://scripts/hurtbox.gd" id="7_0b3e8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5hkx"]
+resource_local_to_scene = true
+shader = ExtResource("2_iw0tt")
+shader_parameter/active = null
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_381vn"]
+radius = 23.0
+height = 74.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjxfd"]
+size = Vector2(60, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqhml"]
+size = Vector2(20, 20.5808)
+
+[sub_resource type="Animation" id="Animation_51ln2"]
+resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_jkedu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3dc0"]
+_data = {
+"Hit": SubResource("Animation_51ln2"),
+"RESET": SubResource("Animation_jkedu")
+}
+
+[node name="Enemy Blue" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hit_anim")]
+script = ExtResource("1_7vda5")
+max_experience = 6
+experience_point_scene = ExtResource("2_phst6")
+item_drop_scene = ExtResource("3_52vbi")
+life = 6.0
+SPEED = 300.0
+hurtbox = NodePath("Hurtbox")
+hit_anim = NodePath("Hit")
+
+[node name="Body" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_n5hkx")
+scale = Vector2(4, 4)
+texture = ExtResource("3_gam7h")
+offset = Vector2(0, -8)
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-4, 29)
+scale = Vector2(4, 4)
+texture = ExtResource("4_r73xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_381vn")
+
+[node name="WhiteGun" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("5_nb68l")
+hitbox = NodePath("Hitbox")
+damage = 1.0
+knockbackForce = 1.0
+belongsToEnemy = true
+
+[node name="Hitbox" type="Area2D" parent="WhiteGun"]
+script = ExtResource("6_wseuj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WhiteGun/Hitbox"]
+position = Vector2(0, -24.5)
+shape = SubResource("RectangleShape2D_wjxfd")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("7_0b3e8")
+belongs_to_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1.13939e-06, -24.5)
+rotation = -3.14159
+scale = Vector2(2.99996, -5.39337)
+shape = SubResource("RectangleShape2D_gqhml")
+
+[node name="Hit" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t3dc0")
+}

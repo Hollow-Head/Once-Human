@@ -17,6 +17,8 @@ var knockbackDirection : Vector2
 var knockbackForce : float
 var _knockbackTimer := GlobalTimer.new()
 
+var invulnerable : bool
+
 ## Signal emited when life is equal or below zero
 signal dead
 

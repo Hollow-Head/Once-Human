@@ -13,7 +13,9 @@ func _ready():
 		add_to_group("Player Hurtbox")
 
 func receive_damage(body : Node2D, damage : float, direction : Vector2, knockbackForce : float):
-	entity.receive_damage(body, damage, direction, knockbackForce)
+	if not entity.invulnerable:
+		entity.receive_damage(body, damage, direction, knockbackForce)
 
 func receive_knockback(direction : Vector2, knockbackForce : float):
-	entity.receive_knockback(direction, knockbackForce)
+	if not entity.invulnerable:
+		entity.receive_knockback(direction, knockbackForce)

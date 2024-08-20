@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/hurtbox.gd" id="7_wghp7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajfof"]
+resource_local_to_scene = true
 shader = ExtResource("2_uxcw8")
 shader_parameter/active = null
 
@@ -163,6 +164,7 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycjwd"]
+resource_local_to_scene = true
 shader = ExtResource("2_uxcw8")
 shader_parameter/active = null
 

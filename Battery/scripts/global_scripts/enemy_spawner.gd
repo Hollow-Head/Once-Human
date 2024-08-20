@@ -12,7 +12,11 @@ var rng := RandomNumberGenerator.new()
 
 var cameraRect : Rect2
 
-var enemyScene = preload("res://scenes/Enemies/enemy.tscn")
+@onready var enemy_scene_red = preload("res://scenes/Enemies/enemy_red.tscn")
+@onready var enemy_scene_blue = preload("res://scenes/Enemies/enemy_blue.tscn")
+@onready var enemy_scene_yellow = preload("res://scenes/Enemies/enemy_yellow.tscn")
+@onready var enemy_scene_green = preload("res://scenes/Enemies/enemy_green.tscn")
+enum enemy_id{RED, BLUE, YELLOW, GREEN}
 
 enum directionToSpawn{LEFT, RIGHT, UP, DOWN}
 
@@ -39,7 +43,17 @@ func updateCameraRect():
 func spawnOutsideCameraRandom():
 	updateCameraRect()
 	
-	var enemy : CharacterBody2D = enemyScene.instantiate()
+	var enemy : CharacterBody2D
+	var type := rng.randi_range(0, enemy_id.size() - 1)
+	match type:
+		enemy_id.RED:
+			enemy = enemy_scene_red.instantiate()
+		enemy_id.BLUE:
+			enemy = enemy_scene_blue.instantiate()
+		enemy_id.YELLOW:
+			enemy = enemy_scene_yellow.instantiate()
+		enemy_id.GREEN:
+			enemy = enemy_scene_green.instantiate()
 	
 	var direction = rng.randi_range(0, 3)
 	var distanceFromEdge = 600
@@ -83,6 +97,7 @@ func _update_spawn_rate():
 	#f(x) = 2 * x + 1
 	_spawn_rate = (2 * _x) + 1
 	_spawn_rate_timer.the_start(_update_rate_delay)
+	spawnDelay += 1.0
 	_x += 1
 
 func _spawn_rate_timeout():

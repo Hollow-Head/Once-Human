@@ -21,9 +21,15 @@ var _pause : Control
 @onready var _death_scene : PackedScene = preload("res://scenes/death.tscn")
 var death : Control
 
+@onready var _upgrade_tree_scene : PackedScene = preload("res://scenes/upgrade_tree.tscn")
+var _upgrade_tree : Control
+
 @onready var hit_particle_scene : PackedScene = preload("res://scenes/particles/hit_effect.tscn")
 @onready var explosion_particle_scene : PackedScene = preload("res://scenes/particles/explosion_effect.tscn")
 @onready var update_highlight_scene : PackedScene = preload("res://scenes/update_highlight.tscn")
+
+@onready var _tutorial_scene : PackedScene = preload("res://scenes/tutorial.tscn")
+var tutorial : Control
 
 signal game_scene_entered_tree
 signal game_scene_exited_tree
@@ -36,13 +42,30 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("Pause") and _is_in_game:
-		if not _is_paused:
+		if not _pause:
 			pause(self)
 			_pause = _pause_scene.instantiate()
 			get_tree().current_scene.add_child(_pause)
-		elif get_the_pause_caller() == self:
+		elif _pause:
 			_pause.queue_free()
+			if not _upgrade_tree:
+				resume()
+	
+	if Input.is_action_just_pressed("Skill Tree") and _is_in_game and not _pause:
+		if not _upgrade_tree:
+			_upgrade_tree = _upgrade_tree_scene.instantiate()
+			get_tree().current_scene.add_child(_upgrade_tree)
+			pause(self)
+		else:
+			_upgrade_tree.queue_free()
 			resume()
+	
+	if Input.is_action_just_pressed("Fullscreen"):
+		if get_window().mode == Window.MODE_WINDOWED:
+			get_window().mode = Window.MODE_FULLSCREEN
+		else:
+			get_window().mode = Window.MODE_WINDOWED
+	
 
 func pause(the_caller : Node):
 	if _who_called_pause != null:

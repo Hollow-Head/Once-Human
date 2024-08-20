@@ -11,6 +11,7 @@ bulletScene = ExtResource("2_1kow7")
 gun_barrel = NodePath("Marker2D")
 max_ammo = 12
 reload_delay = 1.0
+bullet_spread = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_yphqw")

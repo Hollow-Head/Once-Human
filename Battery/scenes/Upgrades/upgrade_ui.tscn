@@ -21,12 +21,15 @@ columns = 4
 
 [node name="More Damage" parent="GridContainer" instance=ExtResource("1_rqf3f")]
 layout_mode = 2
+percentage = 15
 
 [node name="More Life" parent="GridContainer" instance=ExtResource("2_yqohk")]
 layout_mode = 2
 
 [node name="More Speed" parent="GridContainer" instance=ExtResource("3_2cdmm")]
 layout_mode = 2
+percentage = 5
 
 [node name="More XP" parent="GridContainer" instance=ExtResource("4_p325f")]
 layout_mode = 2
+percentage = 20

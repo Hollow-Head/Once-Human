@@ -1,0 +1,188 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg73r2jrcy37h"]
+
+[ext_resource type="Texture2D" uid="uid://c71evt1mogj6s" path="res://assets/tutorial/first.png" id="1_gkv7s"]
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_wn0el"]
+[ext_resource type="Texture2D" uid="uid://gy6nb8fdmoxc" path="res://assets/tutorial/second.png" id="2_qy4o7"]
+[ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="2_w2mth"]
+[ext_resource type="Texture2D" uid="uid://dacfjxf0d4010" path="res://assets/tutorial/third.png" id="3_c61uo"]
+[ext_resource type="Texture2D" uid="uid://bbi8nryvrpjwc" path="res://assets/seta.png" id="6_j73g5"]
+[ext_resource type="FontFile" uid="uid://cds4x5x7hqd05" path="res://assets/fonts/pixel_operator/PixelOperator8.ttf" id="7_uvmpk"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wn0el")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[node name="Left" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Right" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="First" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -243.5
+offset_right = 423.0
+offset_bottom = 243.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+texture = ExtResource("1_gkv7s")
+
+[node name="Second" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -243.5
+offset_right = 423.0
+offset_bottom = 243.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 7
+texture = ExtResource("2_qy4o7")
+
+[node name="Third" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -243.5
+offset_right = 423.0
+offset_bottom = 243.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("3_c61uo")
+
+[node name="Tutorial" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -197.0
+offset_top = -30.0
+offset_right = 198.0
+offset_bottom = 74.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_fonts/normal_font = ExtResource("2_w2mth")
+theme_override_font_sizes/normal_font_size = 51
+bbcode_enabled = true
+text = "
+TUTORIAL"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Left Arrow" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+mouse_default_cursor_shape = 2
+texture = ExtResource("6_j73g5")
+
+[node name="Right Arrow" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("6_j73g5")
+
+[node name="Leave" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -63.0
+offset_right = 50.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("7_uvmpk")
+theme_override_font_sizes/font_size = 25
+text = "Sair"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Leave" to="." method="_on_leave_pressed"]

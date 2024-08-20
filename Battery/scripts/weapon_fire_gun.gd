@@ -13,6 +13,8 @@ var ammo : int
 @export_range(0.01, 10000) var reload_delay := 0.1
 var reload_timer := GlobalTimer.new()
 
+@export_range(0, 180) var bullet_spread : float
+
 var direction : Vector2
 
 @onready var reload_scene : PackedScene = preload("res://scenes/reload.tscn")
@@ -57,6 +59,8 @@ func _physics_process(delta):
 
 func shoot(direction : Vector2):
 	var bullet : Bullet = bulletScene.instantiate()
+	if Player.player.direction:
+		direction = direction.rotated(deg_to_rad(Global.rng.randf_range(-bullet_spread, bullet_spread)))
 	bullet.shoot(gun_barrel.global_position, direction, belongsToEnemy)
 	get_tree().current_scene.add_child(bullet)
 
