@@ -8,6 +8,7 @@
 size = Vector2(50, 28)
 
 [node name="Paper" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_5twfe")
 type_of_drop = 3
 SPEED = 500.0

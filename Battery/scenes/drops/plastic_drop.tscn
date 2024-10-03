@@ -8,6 +8,7 @@
 height = 40.0
 
 [node name="Plastic" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_iuas4")
 type_of_drop = 1
 SPEED = 500.0

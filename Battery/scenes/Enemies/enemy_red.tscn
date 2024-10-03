@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=3 uid="uid://dpit8yqqppkun"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_3dpip"]
-[ext_resource type="PackedScene" uid="uid://bqle8c5qyu2nc" path="res://scenes/drops/experience_point.tscn" id="2_fcjt0"]
+[ext_resource type="PackedScene" uid="uid://bqle8c5qyu2nc" path="res://scenes/drops/experience_point.tscn" id="2_kgc7f"]
 [ext_resource type="PackedScene" uid="uid://c7hv2cprjug0y" path="res://scenes/drops/plastic_drop.tscn" id="3_l5w4x"]
+[ext_resource type="Texture2D" uid="uid://iuqimqfqxl0u" path="res://assets/sprites/Enemy/simple_enemy_red.png" id="4_nafay"]
 [ext_resource type="Shader" path="res://shaders/hit.gdshader" id="4_t11ae"]
-[ext_resource type="Texture2D" uid="uid://iuqimqfqxl0u" path="res://assets/sprites/Enemy/simple_enemy_red.png" id="5_5m6hm"]
 [ext_resource type="Texture2D" uid="uid://xk4w34c8csxc" path="res://assets/sprites/shadow.png" id="6_tnqul"]
 [ext_resource type="Script" path="res://scripts/weapon_white_gun.gd" id="7_6la8t"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_fvokj"]
@@ -67,7 +67,7 @@ y_sort_enabled = true
 script = ExtResource("1_3dpip")
 typeOfEnemy = 1
 max_experience = 6
-experience_point_scene = ExtResource("2_fcjt0")
+experience_point_scene = ExtResource("2_kgc7f")
 item_drop_scene = ExtResource("3_l5w4x")
 life = 6.0
 SPEED = 300.0
@@ -79,7 +79,7 @@ y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_jnijl")
 scale = Vector2(4, 4)
-texture = ExtResource("5_5m6hm")
+texture = ExtResource("4_nafay")
 offset = Vector2(0, -8)
 
 [node name="Shadow" type="Sprite2D" parent="."]

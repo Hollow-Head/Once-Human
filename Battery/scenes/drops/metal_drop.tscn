@@ -8,6 +8,7 @@
 size = Vector2(41, 26)
 
 [node name="Metal" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_l1s8s")
 type_of_drop = 4
 SPEED = 500.0

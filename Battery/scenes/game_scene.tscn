@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://jslxb44t5xu0" path="res://scenes/player.tscn" id="2_kxo8i"]
 [ext_resource type="PackedScene" uid="uid://c1qw3gvmn3di3" path="res://scenes/ui.tscn" id="3_2gexv"]
 [ext_resource type="FontFile" uid="uid://by66f2xudplvc" path="res://assets/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="5_4vmll"]
-[ext_resource type="Script" path="res://power.gd" id="6_wkxy0"]
+[ext_resource type="Script" path="res://scripts/power.gd" id="6_wkxy0"]
 
 [sub_resource type="Environment" id="Environment_ufhra"]
 background_mode = 3
