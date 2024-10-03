@@ -29,7 +29,7 @@ func _ready():
 	
 	add_child(_spawn_rate_timer)
 	_spawn_rate_timer.timeout.connect(_spawn_rate_timeout)
-	_update_spawn_rate()
+	#_update_spawn_rate()
 
 func _spawnTimerTimeout():
 	for n in _spawn_rate:
@@ -92,6 +92,11 @@ func stop() -> void:
 
 func resume() -> void:
 	_spawnTimer.paused = false
+
+func reset() -> void:
+	_x = 0
+	_spawn_rate = 0
+	_update_spawn_rate()
 
 func _update_spawn_rate():
 	#f(x) = 2 * x + 1

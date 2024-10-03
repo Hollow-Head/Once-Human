@@ -37,6 +37,7 @@ signal game_scene_exited_tree
 var _is_in_game : bool
 
 func _ready():
+	Engine.max_fps = 60
 	death = _death_scene.instantiate()
 	change_to_title_screen()
 
@@ -92,6 +93,7 @@ func change_to_title_screen():
 
 func change_to_game_screen():
 	get_tree().change_scene_to_packed(_game_scene)
+	EnemySpawner.reset()
 	emit_signal("game_scene_entered_tree")
 	_is_in_game = true
 

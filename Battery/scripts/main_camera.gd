@@ -20,7 +20,6 @@ var _initial_zoom : Vector2
 func _ready():
 	camera = self
 	_initial_zoom = zoom
-	Engine.max_fps = 60
 
 func _process(delta):
 	if Global.is_paused():
